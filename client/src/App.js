@@ -1,60 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 
-import { useDispatch } from 'react-redux'
-import { getPosts } from './actions/posts'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Posts from './components/Posts/Posts'
-import Form from './components/Form/Form'
-
-import memories from './images/memories.png'
-
-import useStyles from './styles'
+import Home from './components/Home'
+import Navbar from './components/Navbar'
+import Auth from './components/Auth'
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null)
-  const classes = useStyles()
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [dispatch])
-
   return (
-    <Container maxwidth='lg'>
-      <AppBar className={classes.appBar} position='static' color='inherit'>
-        <Typography
-          className={`${classes.heading} ${classes.noSelect}`}
-          variant='h3'
-          align='center'>
-          Memories
-        </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt='memories'
-          height='80'
-        />
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid
-            container
-            className={classes.mainContainer}
-            justify='space-between'
-            alignItems='stretch'
-            spacing={3}>
-            <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <Posts setCurrentId={setCurrentId} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+    <Router>
+      <Container maxwidth='lg'>
+        <Navbar />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/auth' exact component={Auth} />
+        </Switch>
+      </Container>
+    </Router>
   )
 }
 
