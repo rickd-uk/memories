@@ -15,23 +15,44 @@ import {
   Button,
 } from '@material-ui/core'
 
+import { signin, signup } from '../../actions/auth'
 import Input from './Input'
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import useStyles from './styles'
 
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+}
+
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false)
   const classes = useStyles()
   const [isSignup, setIsSignup] = useState(false)
+  const [formData, setFormData] = useState(initialState)
 
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const handleSubmit = () => {}
-  const handleChange = () => {}
-  const handleShowPassword = () => setShowPassword((prev) => !prev)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (isSignup) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+    }
+  }
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleShowPassword = () => setShowPassword(!showPassword)
 
   const switchMode = () => {
     setIsSignup((prev) => !prev)
@@ -93,7 +114,7 @@ const Auth = () => {
             <Input
               name='password'
               label='Password'
-              onChange={handleChange}
+              handleChange={handleChange}
               type={showPassword ? 'text' : 'password'}
               handleShowPassword={handleShowPassword}
             />
