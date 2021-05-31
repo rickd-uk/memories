@@ -1,7 +1,7 @@
 import React from 'react'
 import Resizer from 'react-image-file-resizer'
 
-export default class FileBase64 extends React.Component {
+export default class FileBase extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -54,18 +54,6 @@ export default class FileBase64 extends React.Component {
           },
           'base64',
         )
-
-        // console.log(fileInfo)
-
-        // Push it to the state
-        // allFiles.push(fileInfo)
-
-        // If all files have been proceed
-        // if (allFiles.length === files.length) {
-        //   // Apply Callback function
-        //   if (this.props.multiple) this.props.onDone(allFiles)
-        //   else this.props.onDone(allFiles[0])
-        // }
       } // reader.onload
     } // for
   }
@@ -82,6 +70,6 @@ export default class FileBase64 extends React.Component {
   }
 }
 
-FileBase64.defaultProps = {
+FileBase.defaultProps = {
   multiple: false,
 }

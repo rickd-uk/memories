@@ -56,11 +56,10 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup((prev) => !prev)
-    handleShowPassword(false)
+    setShowPassword(false)
   }
 
   const googleSuccess = async (res) => {
-    console.log(res)
     const result = res?.profileObj
     const token = res?.tokenId
 
