@@ -1,6 +1,6 @@
 import React from 'react'
-import Modal from '../../Modal'
-import useModal from '../../Modal/useModal'
+// import Modal from '../../Modal'
+// import useModal from '../../Modal/useModal'
 
 import {
   Card,
@@ -30,7 +30,7 @@ const Post = ({ post, setCurrentId }) => {
 
   const user = JSON.parse(localStorage.getItem('profile'))
 
-  const { isShowing, toggle } = useModal()
+  // const { isShowing, toggle } = useModal()
 
   const Likes = () => {
     const pLikes = post.likes.length
@@ -104,17 +104,19 @@ const Post = ({ post, setCurrentId }) => {
       </Typography>
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
-          {post.message.length > 150 ? (
+          {/* {post.message.length > 150 ? (
             <>
               {`${post.message.substr(0, 200)}...`}
               <button className='button-default' onClick={toggle}>
                 Show More
               </button>
               <Modal isShowing={isShowing} hide={toggle} text={post.message} />
+              
             </>
           ) : (
             post.message
-          )}
+          )} */}
+          {post.message}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
