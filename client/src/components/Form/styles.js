@@ -6,16 +6,8 @@ export default makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  noSelect: {
-    msUserSelect: 'none',
-    mozUserSelect: 'none',
-    webkitUserSelect: 'none',
-    webkitTouchCallout: 'none',
-    khtmlUserSelect: 'none',
-    userSelect: 'none',
-  },
   paper: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
   },
   form: {
     display: 'flex',
@@ -23,10 +15,18 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
   },
   fileInput: {
-    width: '90%',
-    margin: '15px 0',
+    width: '97%',
+    margin: '10px 0',
   },
   buttonSubmit: {
     marginBottom: 10,
+  },
+  noSelect: {
+    msUserSelect: 'none',
+    mozUserSelect: 'none',
+    webkitUserSelect: 'none',
+    webkitTouchCallout: 'none',
+    khtmlUserSelect: 'none',
+    userSelect: 'none',
   },
 }))

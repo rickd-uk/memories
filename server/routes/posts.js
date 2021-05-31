@@ -4,6 +4,7 @@ import auth from '../middleware/auth.js'
 
 import {
   getPosts,
+  getPostsBySearch,
   createPost,
   updatePost,
   deletePost,
@@ -13,6 +14,8 @@ import {
 const router = express.Router()
 
 router.get('/', getPosts)
+router.get('/search', getPostsBySearch)
+
 router.post('/', auth, createPost)
 router.patch('/:id', auth, updatePost)
 router.delete('/:id', auth, deletePost)
