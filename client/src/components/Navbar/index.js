@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 
 import useStyles from './styles'
 
+import decode from 'jwt-decode'
+
 import memories from '../../images/memories.png'
 import { LOGOUT } from '../../constants/actionTypes'
 
@@ -16,7 +18,7 @@ const Navbar = () => {
   const location = useLocation()
 
   const logout = () => {
-    dispatch({ type: 'LOGOUT' })
+    dispatch({ type: LOGOUT })
 
     history.push('/')
 
@@ -26,7 +28,13 @@ const Navbar = () => {
   useEffect(() => {
     const token = user?.token
 
-    // JWT
+    if (token) {
+      const decodedToken = decode(token)
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout()
+      }
+    }
 
     setUser(JSON.parse(localStorage.getItem('profile')))
   }, [location, user?.token])
