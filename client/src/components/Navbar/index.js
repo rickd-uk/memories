@@ -8,7 +8,8 @@ import useStyles from './styles'
 
 import decode from 'jwt-decode'
 
-import memories from '../../images/memories.png'
+import memoriesLogo from '../../images/memoriesLogo.png'
+import memoriesText from '../../images/memoriesText.png'
 import { LOGOUT } from '../../constants/actionTypes'
 
 const Navbar = () => {
@@ -37,27 +38,28 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')))
-  }, [location, user?.token])
+  }, [location])
 
   const classes = useStyles()
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>
-      <div className={classes.brandContainer}>
-        <Typography
+      <Link to='/' className={classes.brandContainer}>
+        {/* <Typography
           component={Link}
           to='/'
           className={`${classes.heading} ${classes.noSelect}`}
           variant='h3'
           align='center'>
           Memories
-        </Typography>
+        </Typography> */}
+        <img src={memoriesText} alt='icon' height='45px' />
         <img
           className={classes.image}
-          src={memories}
-          alt='memories'
-          height='80'
+          src={memoriesLogo}
+          alt='memories logo'
+          height='40px'
         />
-      </div>
+      </Link>
       <Toolbar>
         {user ? (
           <div className={classes.profile}>

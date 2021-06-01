@@ -40,9 +40,9 @@ const Home = () => {
 
   const classes = useStyles()
 
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [currentId, dispatch])
+  // useEffect(() => {
+  //   dispatch(getPosts())
+  // }, [currentId, dispatch])
 
   const handleKeyPress = (e) => {
     // 13 - return key
@@ -120,10 +120,11 @@ const Home = () => {
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-
-            <Paper className={classes.pagination} elevation={6}>
-              <Pagination page={page} />
-            </Paper>
+            {!searchQuery && !tags.length && (
+              <Paper className={classes.pagination} elevation={6}>
+                <Pagination page={page} className={classes.pagination} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>
