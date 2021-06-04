@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { useParams, useHistory } from 'react-router-dom'
 
-import { getPost } from '../../actions/posts'
+import { getPost, getPostsBySearch } from '../../actions/posts'
 import useStyles from './styles'
 
 const PostDetails = () => {
@@ -18,10 +18,16 @@ const PostDetails = () => {
     dispatch(getPost(id))
   }, [id, dispatch])
 
+  useEffect(() => {
+    if (post) {
+      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }))
+    }
+  }, [post])
+
   if (!post) {
     return null
   } else {
-    console.log(post)
+    // console.log(post)
   }
 
   if (isLoading) {
@@ -31,6 +37,10 @@ const PostDetails = () => {
       </Paper>
     )
   }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id)
+
+  const openPost = (_id) => history.push(`/posts/${_id}`)
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -74,6 +84,38 @@ const PostDetails = () => {
           />
         </div>
       </div>
+      {recommendedPosts?.length && (
+        <div className={classes.section}>
+          <Typography gutterBottom variant='h5'>
+            You might also like
+          </Typography>
+          <Divider />
+          <div className={classes.recommendedPosts}>
+            {recommendedPosts.map(
+              ({ title, message, name, likes, selectedFile, _id }) => (
+                <div
+                  style={{ margin: '20px', cursor: 'pointer' }}
+                  onClick={() => openPost(_id)}
+                  key={_id}>
+                  <Typography gutterBottom variant='h6'>
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom variant='subtitle2'>
+                    {name}
+                  </Typography>
+                  <Typography gutterBottom variant='subtitle2'>
+                    {message}
+                  </Typography>
+                  <Typography gutterBottom variant='subtitle1'>
+                    Likes: {likes.length}
+                  </Typography>
+                  <img src={selectedFile} width='200px' alt='' />
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+      )}
     </Paper>
   )
 }

@@ -45,6 +45,8 @@ export const getPostsBySearch = async (req, res) => {
       $or: [{ title }, { tags: { $in: tags.split(',') } }],
     })
 
+    console.log(posts)
+
     res.json({ data: posts })
   } catch (error) {
     console.error(error)

@@ -9,6 +9,8 @@ import { createPost, updatePost } from '../../actions/posts'
 // import DropZone from '../DropZone'
 import FileBase from '../FileBase'
 
+import { useHistory } from 'react-router-dom'
+
 import useStyles from './styles'
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -24,6 +26,7 @@ const Form = ({ currentId, setCurrentId }) => {
       : null,
   )
   const dispatch = useDispatch()
+  const history = useHistory()
   const classes = useStyles()
   const user = JSON.parse(localStorage.getItem('profile'))
 
@@ -42,7 +45,7 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault()
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }))
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history))
       clear()
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))

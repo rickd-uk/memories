@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import {
   Container,
@@ -19,7 +19,7 @@ import Form from '../Form'
 import Pagination from '../Pagination'
 
 import { useDispatch } from 'react-redux'
-import { getPosts, getPostsBySearch } from '../../actions/posts'
+import { getPostsBySearch } from '../../actions/posts'
 
 import useStyles from './styles'
 
@@ -68,9 +68,7 @@ const Home = () => {
         }),
       )
       history.push(
-        `/posts/search?searchQuery=${searchTerm || 'none'}&tags=${tags.join(
-          ',',
-        )}`,
+        `/posts/search?searchQuery=${searchTerm || ''}&tags=${tags.join(',')}`,
       )
     } else {
       history.push('/')
