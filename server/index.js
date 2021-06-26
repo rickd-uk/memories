@@ -11,7 +11,12 @@ dotenv.config()
 
 app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(express.json({ limit: '30mb', extended: true }))
-app.use(cors())
+app.use(
+  cors({
+    // origin: 'https://mem.rickd.work',
+    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  }),
+)
 
 app.use('/posts', postRoutes)
 app.use('/user', userRoutes)
@@ -20,7 +25,7 @@ app.get('/', (req, res) => {
   res.send('Hello to memories API')
 })
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 4200
 //console.log(process.env.MONGO_CONNECTION_URL)
 mongoose
   .connect(process.env.MONGO_CONNECTION_URL, {

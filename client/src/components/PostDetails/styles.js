@@ -5,7 +5,11 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     objectFit: 'cover',
     width: '100%',
-    maxHeight: '600px',
+    height: '400px',
+    [theme.breakpoints.down('sm')]: {
+      maxHeight: '300px',
+      marginBottom: 20,
+    },
   },
   card: {
     display: 'flex',
@@ -24,8 +28,10 @@ export default makeStyles((theme) => ({
     marginLeft: '20px',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      marginBottom: 50,
     },
   },
+
   recommendedPosts: {
     display: 'flex',
     [theme.breakpoints.down('sm')]: {
@@ -39,5 +45,14 @@ export default makeStyles((theme) => ({
     padding: '20px',
     borderRadius: '15px',
     height: '39vh',
+  },
+  commentsOuterContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  commentsInnerContainer: {
+    height: '200px',
+    overflowY: 'auto',
+    marginRight: '30px',
   },
 }))
