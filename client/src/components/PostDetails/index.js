@@ -24,13 +24,9 @@ const PostDetails = () => {
     if (post) {
       dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }))
     }
-  }, [post])
+  }, [post, dispatch])
 
-  if (!post) {
-    return null
-  } else {
-    // console.log(post)
-  }
+  if (!post) return null
 
   if (isLoading) {
     return (

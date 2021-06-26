@@ -9,8 +9,8 @@ import userRoutes from './routes/users.js'
 const app = express()
 dotenv.config()
 
-app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(express.json({ limit: '30mb', extended: true }))
+app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(
   cors({
     // origin: 'https://mem.rickd.work',
@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 })
 
 const PORT = process.env.PORT || 4200
-//console.log(process.env.MONGO_CONNECTION_URL)
 mongoose
   .connect(process.env.MONGO_CONNECTION_URL, {
     useNewUrlParser: true,
