@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import Modal from '../../Modal'
 // import useModal from '../../Modal/useModal'
 
@@ -33,15 +33,26 @@ const Post = ({ post, setCurrentId }) => {
   const history = useHistory()
 
   const user = JSON.parse(localStorage.getItem('profile'))
+  const [likes, setLikes] = useState(post?.likes)
 
+  const userId = user?.result?.googleId || user?.result?._id
+  const hasLikedPost = post.likes.find((like) => like === userId)
+
+  const handleLike = async () => {
+    dispatch(likePost(post._id))
+
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id) => id !== userId))
+    } else {
+      setLikes([...post.likes, userId])
+    }
+  }
   // const { isShowing, toggle } = useModal()
 
   const Likes = () => {
-    const pLikes = post.likes.length
+    const pLikes = likes?.length
     if (pLikes > 0) {
-      return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id),
-      ) ? (
+      return likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize='small' />
           &nbsp;
@@ -126,7 +137,7 @@ const Post = ({ post, setCurrentId }) => {
           size='small'
           color='primary'
           disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}>
+          onClick={handleLike}>
           <Likes />
         </Button>
         {(user?.result?.googleId === post?.creator ||
